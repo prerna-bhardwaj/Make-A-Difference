@@ -1,8 +1,3 @@
-from hmac import trans_36
-from random import choice
-from statistics import mode
-from tabnanny import verbose
-from tkinter.tix import Tree
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
@@ -91,7 +86,7 @@ class TimeStamp(models.Model):
         return str(self.date)
 
     class Meta:
-        abstract = Tree
+        abstract = True
 
 
 class Transactions(TimeStamp):
