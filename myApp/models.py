@@ -99,4 +99,4 @@ class Transactions(TimeStamp):
         verbose_name_plural = _('Transactions')
 
     def __str__(self) -> str:
-        return f'{super().__str__()} {self.drive} - {self.amount} - {self.userId}'
+        return f'{self.drive} - Amount {self.amount} donated by {self.userId} at {super().__str__()}.'

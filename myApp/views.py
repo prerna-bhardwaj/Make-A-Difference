@@ -32,42 +32,57 @@ class DriveDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Up
 
     lookup_field = 'id'
 
-    def get(self, request):
-        return self.retrieve(request)
+    def get(self, request, id):
+        return self.retrieve(request, id=id)
 
-    def put(self, request):
-        return self.update(request)
+    def put(self, request, id):
+        return self.update(request, id=id)
 
-    def delete(self, request):
-        return self.destroy(request)
+    def delete(self, request, id):
+        return self.destroy(request, id=id)
 
 
 class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     queryset = Transactions.objects.all()
     serializer_class = TransactionSerializer
+    model = Transactions
 
     lookup_field = 'id'
 
-    def get(self, request, id):
-        print(id)
-        return self.list(request, drive=id)
+    def get_queryset(self):
+        return Transactions.objects.filter(drive=self.kwargs['id'])
 
-    def post(self, request, id):
+    def get(self, request, id):
+        queryset = self.get_queryset()
+        serializer = TransactionSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+    def post(self, request):
         data = request.POST
         drive = Drive.objects.get(id=data['drive'])
         print(drive)
         transaction = Transactions(drive=drive, amount=data['amount'], userId=data['userId'])
         transaction.save()
         print(transaction)
-        print(request.POST)
         return Response(str(transaction), status=status.HTTP_201_CREATED)
 
 
-class UserHistory(generics.ListCreateAPIView):
+class UserHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     queryset = Transactions.objects.all()
     serializer_class = TransactionSerializer
+    model = Transactions
 
-    lookup_field = 'userId'
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        return Transactions.objects.filter(userId=self.kwargs['id'])
+
+    def get(self, request, id):
+        queryset = self.get_queryset()
+        serializer = TransactionSerializer(queryset, many=True)
+        return Response(serializer.data)
+        
 
 
 class UserProfileDetails(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
@@ -85,4 +100,3 @@ class UserProfileDetails(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 class UserDetails(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
