@@ -145,14 +145,14 @@ STATICFILES_DIRS = (
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://127.0.0.1:9000",
-    "http://localhost:3030",
-    "http://localhost:3000",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+#     "http://localhost:3030",
+#     "http://localhost:3000",
+# ]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
