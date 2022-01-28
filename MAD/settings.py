@@ -26,7 +26,7 @@ SECRET_KEY = 'cwqk(ytf7%qs=-=*3-n1=0a)bkg-@a*blx@%s8g_u-1+pxq%@&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mad-dj-app.herokuapp.com'] 
+ALLOWED_HOSTS = ['*', 'mad-dj-app.herokuapp.com'] 
 
 
 # Application definition

@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "64037906-023b-46ba-93cd-15858219dff3",
+		"name": "MAD - Be Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "neha",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "neha123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/user/",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Profile list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/userProfile/",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"userProfile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/user/",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": 0,\n    \"address\": \"Mumbai, India\",\n    \"phone\": \"9876543211\",\n    \"age\": 25,\n    \"gender\": 0,\n    \"profession\": \"Employee\",\n    \"user\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/userProfile/",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"userProfile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drives List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/drive/",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"drive",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Drive",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Pandas Drive\",\n    \"description\": \"Drive for animal welfare\",\n    \"expected_amount\": 450000,\n    \"owner_id\": \"1\",\n    \"status\": 0,\n    \"category\": 1,\n    \"imageUrl\": \"https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.who.int%2Fimages%2Fdefault-source%2Fmca%2Fmca-covid-19%2Fcoronavirus-2.tmb-1024v.jpg%3FCulture%3Den%26sfvrsn%3D4dba955c_6&imgrefurl=https%3A%2F%2Fwww.who.int%2Fhealth-topics%2Fcoronavirus&tbnid=V__pa4880hjisM&vet=12ahUKEwjqiPSSqdH1AhVQyKACHU2vDgIQMygBegUIARCGAQ..i&docid=Q6gylnOacs5xaM&w=800&h=532&itg=1&q=covid&ved=2ahUKEwjqiPSSqdH1AhVQyKACHU2vDgIQMygBegUIARCGAQ\",\n    \"state\": \"Jammu\",\n    \"size\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/drive/",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"drive",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Donate to a Drive",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": 3,\n    \"amount\": 8000,\n    \"drive\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/drive/1/history",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"drive",
+						"1",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drive's Transaction History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/drive/1/history",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"drive",
+						"1",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Individual Drive Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/drive/1",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"drive",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User's Transaction History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mad-dj-app.herokuapp.com/user/1/history",
+					"protocol": "https",
+					"host": [
+						"mad-dj-app",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						"1",
+						"history"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
