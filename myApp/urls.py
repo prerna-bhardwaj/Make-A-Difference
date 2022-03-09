@@ -20,9 +20,9 @@ urlpatterns = [
     # User Login
 
     # View all transactions corresponding to a drive
-    path('drive/<int:id>/history', DriveHistory.as_view(), name='driveHistory'),
+    path('drive/<str:id>/history', DriveHistory.as_view(), name='driveHistory'),
 
     # View a User's transaction history
-    path('user/<int:id>/history', UserHistory.as_view(), name='userHistory'),
+    path('user/<str:id>/history', UserHistory.as_view(), name='userHistory'),
 
 ]

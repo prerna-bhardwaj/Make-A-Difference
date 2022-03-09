@@ -26,7 +26,7 @@ class Drive(models.Model):
         (1, _('Medium')),
         (2, _('Big'))
     )
-
+    address = models.CharField(max_length=100, default="0x01", blank=False, null=False)
     name = models.CharField(max_length=200, blank=False)
     description = models.CharField(max_length=1000)
     expected_amount = models.IntegerField(default=0, blank=False)
@@ -60,7 +60,10 @@ class UserProfile(models.Model):
         (2, _('Others'))
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    userAddress = models.CharField(primary_key=True, max_length=100, default='0x01')
+    # username = models.CharField(max_length=100, blank=False, null=True)
+    # password = models.CharField(max_length=100, blank=False, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=0)
     type = models.CharField(max_length=100, choices=TYPE_CHOICES)
     address = models.CharField(max_length=1000)
     phone = models.CharField(max_length=20)
@@ -91,7 +94,7 @@ class TimeStamp(models.Model):
 
 class Transactions(TimeStamp):
     drive = models.ForeignKey(Drive, related_name='drive', on_delete=models.CASCADE)
-    userId = models.IntegerField(default=0, blank=False)
+    userId = models.CharField(max_length=100, blank=False)
     amount = models.IntegerField(default=0, blank=False)
     
     class Meta:

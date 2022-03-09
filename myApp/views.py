@@ -1,4 +1,3 @@
-from codecs import lookup
 from django.http import HttpResponse, request
 from django.shortcuts import render
 from rest_framework.response import Response
@@ -47,24 +46,28 @@ class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
     serializer_class = TransactionSerializer
     model = Transactions
 
-    lookup_field = 'id'
+    # lookup_field = 'address'
 
     def get_queryset(self):
-        return Transactions.objects.filter(drive=self.kwargs['id'])
+        list = Transactions.objects.filter(drive=self.kwargs['id'])
+        print(list)
+        return list
 
     def get(self, request, id):
+        print(self.kwargs)
         queryset = self.get_queryset()
         serializer = TransactionSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
-    def post(self, request):
+    def post(self, request, id):
         data = request.POST
-        drive = Drive.objects.get(id=data['drive'])
+        print(data)
+        drive = Drive.objects.get(id=1)
         print(drive)
         transaction = Transactions(drive=drive, amount=data['amount'], userId=data['userId'])
-        transaction.save()
         print(transaction)
+        transaction.save()
         return Response(str(transaction), status=status.HTTP_201_CREATED)
 
 

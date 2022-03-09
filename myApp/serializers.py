@@ -1,7 +1,9 @@
+from time import time
 from django.forms import fields
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -35,6 +37,9 @@ class UserSerializer(serializers.ModelSerializer):
         }
     
     def create(self, validated_data):
-        user =  User.objects.create_user(**validated_data)
-        # Token.objects.create(user=user)
+        print("----", validated_data)
+        print(timezone.now())
+        user =  User.objects.create_user(username=validated_data['username'],
+                                         password=validated_data['password'],
+                                         last_login=timezone.now())
         return user
