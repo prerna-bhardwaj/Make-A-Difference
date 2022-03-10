@@ -51,7 +51,7 @@ class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
     def get_queryset(self):
         drive = Drive.objects.get(address=self.kwargs['id'])
         list = Transactions.objects.filter(drive=drive)
-        print(list)
+        # print(list)
         return list
 
     def get(self, request, id):
@@ -62,8 +62,8 @@ class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
 
 
     def post(self, request, id):
-        data = request.POST
-        print(data)
+        data = request.data
+        print("Data : ", request.POST, request.data)
         drive = Drive.objects.get(address=id)
         drive.amount_raised += int(data['amount'])
         drive.donation_count += 1
