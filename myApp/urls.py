@@ -10,7 +10,7 @@ urlpatterns = [
     path('drive/', DriveList.as_view(), name='drives'),
 
     # Get details of a particular drive
-    path('drive/<int:id>', DriveDetails.as_view(), name='driveDetails'),
+    path('drive/<str:address>', DriveDetails.as_view(), name='driveDetails'),
 
     # Register a User
     path('user/', UserDetails.as_view(), name='userRegister'),

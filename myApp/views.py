@@ -29,16 +29,16 @@ class DriveDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.Up
     queryset = Drive.objects.all()
     serializer_class = DriveSerializer
 
-    lookup_field = 'id'
+    lookup_field = 'address'
 
-    def get(self, request, id):
-        return self.retrieve(request, id=id)
+    def get(self, request, address):
+        return self.retrieve(request, address=address)
 
-    def put(self, request, id):
-        return self.update(request, id=id)
+    def put(self, request, address):
+        return self.update(request, address=address)
 
-    def delete(self, request, id):
-        return self.destroy(request, id=id)
+    def delete(self, request, address):
+        return self.destroy(request, address=address)
 
 
 class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
@@ -49,7 +49,8 @@ class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
     # lookup_field = 'address'
 
     def get_queryset(self):
-        list = Transactions.objects.filter(drive=self.kwargs['id'])
+        drive = Drive.objects.get(address=self.kwargs['id'])
+        list = Transactions.objects.filter(drive=drive)
         print(list)
         return list
 
@@ -63,8 +64,10 @@ class DriveHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
     def post(self, request, id):
         data = request.POST
         print(data)
-        drive = Drive.objects.get(id=1)
-        print(drive)
+        drive = Drive.objects.get(address=id)
+        drive.amount_raised += int(data['amount'])
+        drive.donation_count += 1
+        drive.save()
         transaction = Transactions(drive=drive, amount=data['amount'], userId=data['userId'])
         print(transaction)
         transaction.save()
