@@ -1,3 +1,4 @@
+from cgitb import lookup
 from django.http import HttpResponse, request
 from django.shortcuts import render
 from rest_framework.response import Response
@@ -106,3 +107,14 @@ class UserProfileDetails(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 class UserDetails(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class RecommendedDrives(generics.GenericAPIView, mixins.ListModelMixin):
+    queryset = Drive.objects.all()
+    serializer_class = DriveSerializer
+    lookup_field = 'address'
+
+    def get(self, request, userAddress):
+        return self.list(request)
+
+    

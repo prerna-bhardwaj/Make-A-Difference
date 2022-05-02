@@ -12,6 +12,9 @@ urlpatterns = [
     # Get details of a particular drive
     path('drive/<str:address>', DriveDetails.as_view(), name='driveDetails'),
 
+    # Get recommended drives for a particular user based on his transaction history
+    path('drive/recommend/<str:userAddress>', RecommendedDrives.as_view(), name='recommendedDrives'),
+
     # Register a User
     path('user/', UserDetails.as_view(), name='userRegister'),
 
