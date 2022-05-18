@@ -1,5 +1,5 @@
-from cgitb import lookup
-from django.http import HttpResponse, request
+from re import T
+from django.http import HttpResponse, JsonResponse, request
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
@@ -8,11 +8,11 @@ from .serializers import *
 from .models import *
 from rest_framework.views import APIView
 from rest_framework import status
+from .recSys import *
 
 class BaseView(APIView):
     def get(self, request):
         return HttpResponse("Base Url")
-
 
 
 class DriveList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
@@ -91,7 +91,6 @@ class UserHistory(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateM
         return Response(serializer.data)
         
 
-
 class UserProfileDetails(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
@@ -115,6 +114,13 @@ class RecommendedDrives(generics.GenericAPIView, mixins.ListModelMixin):
     lookup_field = 'address'
 
     def get(self, request, userAddress):
-        return self.list(request)
+        latest_transaction = Transactions.objects.filter(userId=userAddress).order_by('-date')[0]
+        drive = latest_transaction.drive
+        print("Transactions : ", latest_transaction)
+        print("Latest Drive : ", drive)
+        drives = get_recommendation_F_name("Yad Ezra")
+        jsonVal = json.loads(drives.to_json())
+        print(type(jsonVal))
+        return JsonResponse(drives.to_json(), safe=False)
 
     
